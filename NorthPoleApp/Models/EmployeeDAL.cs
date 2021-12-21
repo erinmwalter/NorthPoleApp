@@ -10,12 +10,16 @@ namespace NorthPoleApp.Models
         //when program is booted up will have no one logged in
         public static int CurrentEmployeeId = -1;
 
+        //setting up a bool to track if santa the "admin" is logged in
+        //just to make readability better in some spots in controller
+        public static bool IsAdmin => (CurrentEmployeeId == 1);
+
         //LOGIN METHOD
         public bool isSuccess(Employee e)
         {
             using (var connect = new MySqlConnection(Secret.Connection))
             {
-                string sql = $"select * from login where username='{e.UserName}' and password='{e.Password}'";
+                string sql = $"select * from employees where username='{e.UserName}' and password='{e.Password}'";
 
                 connect.Open();
                 Employee user = connect.Query<Employee>(sql).FirstOrDefault();

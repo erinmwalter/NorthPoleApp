@@ -1,0 +1,21 @@
+﻿@model Employee
+
+<h5>Employee Login</h5>
+@if (ViewBag.Message != "") 
+{ 
+<p class="text-danger">@ViewBag.Message</p>
+}
+<div class="login">
+    @using (Html.BeginForm("Login", "Employee", FormMethod.Post))
+    {
+        @Html.LabelFor(e => e.UserName)
+        @Html.EditorFor(e => e.UserName)
+        @Html.ValidationMessageFor(e => e.UserName, "", new { @class = "text-danger" })
+
+        @Html.LabelFor(e => e.Password)
+        @Html.EditorFor(e => e.Password)
+        @Html.ValidationMessageFor(e => e.Password, "", new { @class = "text-danger" })
+
+        <input type="Submit" value="Login" />
+    }
+</div>

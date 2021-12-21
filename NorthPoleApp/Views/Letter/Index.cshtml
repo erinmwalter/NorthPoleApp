@@ -1,0 +1,57 @@
+﻿@model Letter
+@{
+    List<Gift> gifts = ViewData["Gifts"] as List<Gift>;
+}
+
+<h3>Write A Letter to Santa</h3>
+
+@if (ViewBag.Message != "") 
+{ 
+    <p>@ViewBag.Message</p>
+}
+
+@using (Html.BeginForm("Index", "Letter", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(l => l.Name)
+        @Html.EditorFor(l => l.Name)
+        @Html.ValidationMessageFor(l => l.Name, "", new { @class = "text-danger" })
+    </div>
+    <div>
+        @Html.LabelFor(l => l.Age)
+        @Html.EditorFor(l => l.Age)
+        @Html.ValidationMessageFor(l => l.Age, "", new { @class = "text-danger" })
+    </div>
+    <div>
+        @Html.LabelFor(l => l.City)
+        @Html.EditorFor(l => l.City)
+        @Html.ValidationMessageFor(l => l.City, "", new { @class = "text-danger" })
+    </div>
+    <div>
+        @Html.LabelFor(l => l.Country)
+        @Html.EditorFor(l => l.Country)
+        @Html.ValidationMessageFor(l => l.Country, "", new { @class = "text-danger" })
+    </div>
+    <div>
+        @Html.LabelFor(l => l.GiftId)
+        <select name="GiftId">
+            @foreach(Gift g in gifts)
+            {
+                if (g.GiftName != "Lump of Coal")
+                {
+                <option value="@g.GiftId">@g.GiftName</option>
+                }
+            }
+        </select>
+        @Html.ValidationMessageFor(l => l.GiftId, "", new { @class = "text-danger" })
+    </div>
+    <div>
+        @Html.LabelFor(l => l.Note)
+        @Html.EditorFor(l => l.Note)
+        @Html.ValidationMessageFor(l => l.Note, "", new { @class = "text-danger" })
+    </div>
+    <div>
+        <input type="Submit" value="Send Letter" />
+    </div>
+
+}

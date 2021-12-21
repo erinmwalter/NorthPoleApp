@@ -16,7 +16,7 @@ namespace NorthPoleApp.Models
         {
             using (var connect = new MySqlConnection(Secret.Connection)) 
             {
-                string sql = $"insert into letters values(0, '{l.Name}', {l.Age}, '{l.City}', '{l.Country}', \"{l.Note}\")";
+                string sql = $"insert into letters values(0, '{l.Name}', {l.Age}, '{l.City}', '{l.Country}', \"{l.Note}\", null, {l.GiftId})";
                 connect.Open();
                 connect.Query<Letter>(sql);
                 connect.Close();
@@ -29,7 +29,7 @@ namespace NorthPoleApp.Models
         {
             using (var connect = new MySqlConnection(Secret.Connection))
             {
-                string sql = $"update letters set `name`='{l.Name}, age={l.Age}, city='{l.City}, country='{l.Country}, note=\"{l.Note}\" where letterId={l.LetterId}";
+                string sql = $"update letters set `name`='{l.Name}, age={l.Age}, city='{l.City}, country='{l.Country}, note=\"{l.Note}\", giftId={l.GiftId}, isGood={l.IsGood} where letterId={l.LetterId}";
                 connect.Open();
                 connect.Query<Letter>(sql);
                 connect.Close();

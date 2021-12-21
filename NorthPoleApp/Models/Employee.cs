@@ -28,6 +28,7 @@ namespace NorthPoleApp.Models
 
         [Required(ErrorMessage = "Password required")]
         [MaxLength(40)]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         public List<Task> Tasks { get; set; }

@@ -20,6 +20,7 @@ namespace NorthPoleApp.Models
 
         [Required(ErrorMessage = "Please enter city/state")]
         [MaxLength(40)]
+        [Display(Name="City/State/Province")]
         public string City { get; set; }
 
         [Required(ErrorMessage = "Please enter country")]
@@ -27,10 +28,12 @@ namespace NorthPoleApp.Models
         public string Country { get; set; }
 
         [MaxLength(200)]
+        [Display(Name= "Note To Santa")]
         public string Note { get; set; }
 
         public bool IsGood { get; set; }
 
+        [Display(Name = "Gift Choice")]
         public int GiftId { get; set; }
 
     }

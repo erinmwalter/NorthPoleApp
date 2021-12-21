@@ -1,5 +1,12 @@
 create database northpole;
 
+-- create gifts table
+create table gifts
+(
+	giftId int not null primary key auto_increment,
+    giftName varchar(100)
+);
+
 -- create table for letters to santa
 -- note that the giftID is associated with gifts table below
 -- isGood is for santa to update status of person
@@ -14,13 +21,6 @@ create table letters
     isGood bit,
     giftId int,
     foreign key (giftId) references gifts(giftId)
-);
-
--- create gifts table
-create table gifts
-(
-	giftId int not null primary key auto_increment,
-    giftName varchar(100)
 );
 
 -- create employees table
