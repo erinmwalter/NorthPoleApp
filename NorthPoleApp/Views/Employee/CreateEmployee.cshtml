@@ -1,0 +1,25 @@
+﻿@model Employee
+
+<h5>Create New Employee</h5>
+
+@using (Html.BeginForm("CreateEmployee", "Employee", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(e => e.FullName)
+        @Html.EditorFor(e => e.FullName)
+        @Html.ValidationMessageFor(e => e.FullName, "", new { @class = "text-danger" })
+    </div>
+    <div>
+        @Html.LabelFor(e => e.Title)
+        @Html.EditorFor(e => e.Title)
+        @Html.ValidationMessageFor(e => e.Title, "", new { @class = "text-danger" })
+    </div>
+    <div>
+        @Html.LabelFor(e => e.UserName)
+        @Html.EditorFor(e => e.UserName)
+        @Html.ValidationMessageFor(e => e.UserName, "", new { @class = "text-danger" })
+    </div>
+    <div>
+        <input type="submit" value="Submit" />
+    </div>
+}

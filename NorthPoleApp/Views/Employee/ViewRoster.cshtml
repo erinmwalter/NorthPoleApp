@@ -1,0 +1,26 @@
+﻿@model List<Employee>
+
+<h3>Employee Roster</h3>
+<table>
+    <tr>
+        <th>Employee Id</th>
+        <th>Full Name</th> 
+        <th>Title</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+
+@foreach (Employee e in Model)
+{
+    if (e.Id != 1)
+    {
+<tr>
+    <td>@e.Id</td>
+    <td>@e.FullName</td>
+    <td>@e.Title</td>
+    <td><a asp-action="AdminEdit" asp-controller="Employee" asp-route-Id="@e.Id">Edit</a></td>
+    <td><a asp-action="Delete" asp-controller="Employee" asp-route-Id="@e.Id">Delete</a></td>
+</tr>
+    }
+}
+</table>

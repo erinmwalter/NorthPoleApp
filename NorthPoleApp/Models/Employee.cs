@@ -26,7 +26,6 @@ namespace NorthPoleApp.Models
         [MaxLength(40)]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Password required")]
         [MaxLength(40)]
         [DataType(DataType.Password)]
         public string Password { get; set; }

@@ -50,7 +50,7 @@ namespace NorthPoleApp.Models
         {
             using (var connect = new MySqlConnection(Secret.Connection))
             {
-                string sql = $"insert into employees values(0, '{e.FullName}', '{e.Title}', '{e.UserName}', '{e.Password}'";
+                string sql = $"insert into employees values(0, '{e.FullName}', '{e.Title}', '{e.UserName}', '{e.Password}')";
                 connect.Open();
                 connect.Query<Employee>(sql);
                 connect.Close();
@@ -100,7 +100,7 @@ namespace NorthPoleApp.Models
         {
             using (var connect = new MySqlConnection(Secret.Connection))
             {
-                string sql = $"update employees set fullname='{e.FullName}', title='{e.Title}', username='{e.UserName}', password='{e.Password}' where id={e.Id}"; 
+                string sql = $"update employees set fullName='{e.FullName}', title='{e.Title}', userName='{e.UserName}', password='{e.Password}' where id={e.Id}"; 
                 connect.Open();
                 connect.Query<Employee>(sql);
                 connect.Close();
