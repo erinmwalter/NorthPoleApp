@@ -21,12 +21,19 @@
 </table>
 
 <h5>Update Status</h5>
-@using (Html.BeginForm("Review", "Letter", FormMethod.Post)) 
-{ 
+@using (Html.BeginForm("Review", "Letter", FormMethod.Post))
+{
     <div>
-        @Html.LabelFor(model=>model.IsGood)
-        @Html.CheckBoxFor(model=>model.IsGood)
-        @Html.ValidationMessageFor(model=>model.IsGood, "", new { @class="text-danger"})
+        @Html.LabelFor(model => model.IsGood)
+        @Html.CheckBoxFor(model => model.IsGood)
+        @Html.ValidationMessageFor(model => model.IsGood, "", new { @class = "text-danger" })
     </div>
+    <input type="hidden" value="@Model.LetterId" name="LetterId" />
+    <input type="hidden" value="@Model.Name" name="Name" />
+    <input type="hidden" value="@Model.Age" name="Age" />
+    <input type="hidden" value="@Model.City" name="City" />
+    <input type="hidden" value="@Model.Country" name="Country" />
+    <input type="hidden" value="@Model.GiftId" name="GiftId" />
+    <input type="hidden" value="@Model.Note" name="Note" />
     <input type="Submit" value="Submit" />
 }

@@ -1,35 +1,54 @@
 ﻿@model List<NorthPoleApp.Models.Task>
 
+@{
+    List<Gift> gifts = ViewData["gifts"] as List<Gift>;
+}
 <h3>Task Dashboard</h3>
+@if (EmployeeDAL.CurrentEmployeeId != -1)
+{
+
+
 <table>
-    <tr>
-        <th>Task Id</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Current Status</th>
-        <th>Letter Id</th>
-        <th>Assigned To</th>
-        <th>Update</th>
-        <th>Delete</th>
+        <tr>
+            <th>Task Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Current Status</th>
+            <th>Gift Name</th>
+            <th>Assigned To</th>
+            <th>Update</th>
+            @if (EmployeeDAL.IsAdmin)
+            {
+            <th>Delete</th>
+            }
+        </tr>
+
+        @foreach (NorthPoleApp.Models.Task t in Model)
+        {
+<tr>
+    <td>@t.Id</td>
+    <td>@t.Name</td>
+    <td>@t.Description</td>
+    <td>@t.CurrentStatus</td>
+    <td>@gifts.Where(g => g.GiftId == t.GiftId).First().GiftName</td>
+    <td>
+        @foreach (Employee e in t.Employees)
+        {
+            <p>@e.FullName</p>
+        }
+    </td>
+    <td><a asp-action="UpdateTask" asp-controller="Task" asp-route-Id="@t.Id">Update</a></td>
+    @if (EmployeeDAL.IsAdmin)
+    {
+        <td><a asp-action="Delete" asp-controller="Task" asp-route-Id="@t.Id">Delete</a></td>
+    }
     </tr>
 
-    @foreach (NorthPoleApp.Models.Task t in Model)
-    {
-            <tr>
-                <td>@t.Id</td>
-                <td>@t.Name</td>
-                <td>@t.Description</td>
-                <td>@t.CurrentStatus</td>
-                <td>@t.LetterId</td>
-                <td>
-                    @foreach (Employee e in t.Employees) 
-                    { 
-                        <p>@e.FullName</p>
-                    }
-                </td>
-                <td><a asp-action="UpdateTask" asp-controller="Task" asp-route-Id="@t.Id">Update</a></td>
-                <td><a asp-action="Delete" asp-controller="Task" asp-route-Id="@t.Id">Delete</a></td>
-            </tr>
-
-    }
-</table>
+        }
+    </table>
+}
+else
+{
+    <p>You are an unauthorized to view this page</p>
+    <p>Click <a asp-controller="Home" asp-action="Index">here</a> to go to main page</p>
+}

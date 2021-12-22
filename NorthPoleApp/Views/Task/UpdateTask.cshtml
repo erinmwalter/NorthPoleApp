@@ -1,0 +1,47 @@
+﻿@model NorthPoleApp.Models.Task
+
+@{
+    List<Employee> employees = ViewData["employees"] as List<Employee>;
+}
+
+@if (EmployeeDAL.CurrentEmployeeId != -1)
+{
+    <h3>Update Task</h3>
+    @using (Html.BeginForm("UpdateTask", "Task", FormMethod.Post))
+    {
+        <div>
+            @Html.LabelFor(t => t.Name)
+            @Html.EditorFor(t => t.Name)
+            @Html.ValidationMessageFor(t => t.Name, "", new { @class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(t => t.Description)
+            @Html.EditorFor(t => t.Description)
+            @Html.ValidationMessageFor(t => t.Description, "", new { @class = "text-danger" })
+        </div>
+        <div>
+            @Html.LabelFor(t => t.CurrentStatus)
+            @Html.DropDownListFor(t => t.CurrentStatus, new SelectList(Enum.GetValues(typeof(Status))))
+            @Html.ValidationMessageFor(t => t.CurrentStatus, "", new { @class = "text-danger" })
+        </div>
+        <div>
+            <p>Assign Task</p>
+            @foreach (Employee e in employees)
+            {
+                <input type="checkbox" name="employees[]" value="@e.Id" id="@e.Id" />
+                <label for="@e.Id">@e.FullName</label>
+                <br />
+            }
+        </div>
+        <input type="hidden" name="GiftId" value="@Model.GiftId" />
+        <input type="hidden" name="LetterId" value="@Model.LetterId" />
+        <input type="hidden" name="Id" value="@Model.Id" />
+
+        <input type="Submit" value="Update Task" />
+    }
+}
+else
+{
+    <p>You are an unauthorized to view this page</p>
+    <p>Click <a asp-controller="Home" asp-action="Index">here</a> to go to main page</p>
+}

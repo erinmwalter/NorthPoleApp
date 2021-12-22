@@ -29,7 +29,7 @@ namespace NorthPoleApp.Models
         {
             using (var connect = new MySqlConnection(Secret.Connection))
             {
-                string sql = $"update letters set `name`='{l.Name}, age={l.Age}, city='{l.City}, country='{l.Country}, note=\"{l.Note}\", giftId={l.GiftId}, isGood={l.IsGood}, isReviewed={l.IsReviewed} where letterId={l.LetterId}";
+                string sql = $"update letters set `name`='{l.Name}', age={l.Age}, city='{l.City}', country='{l.Country}', note=\"{l.Note}\", giftId={l.GiftId}, isGood={l.IsGood}, isReviewed={l.IsReviewed} where letterId={l.LetterId}";
                 connect.Open();
                 connect.Query<Letter>(sql);
                 connect.Close();

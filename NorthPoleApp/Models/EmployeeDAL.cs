@@ -85,10 +85,10 @@ namespace NorthPoleApp.Models
             using (var connect = new MySqlConnection(Secret.Connection))
             {
                 string sql = $"select * from employees where id = {id}";
-                string tasksql = $"select * from tasks inner join employeestasks on tasks.id = employeestasks.taskid where employeeid={id}";
+                string tasksql = $"select tasks.id, `name`, `description`, currentStatus, giftId, letterId from tasks inner join employeestasks on tasks.id = employeestasks.taskid where employeeid={id}";
                 connect.Open();
                 Employee e = connect.Query<Employee>(sql).First();
-                e.Tasks = connect.Query<Task>(sql).ToList();
+                e.Tasks = connect.Query<Task>(tasksql).ToList();
                 connect.Close();
 
                 return e;

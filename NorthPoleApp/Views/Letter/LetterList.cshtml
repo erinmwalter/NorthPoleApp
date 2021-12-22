@@ -5,6 +5,7 @@
 }
 
 <h3>New Letters</h3>
+@if(EmployeeDAL.IsAdmin){
 <table>
     <tr>
         <th>Letter ID</th>
@@ -24,9 +25,15 @@
             <td>@l.Age</td>
             <td>@l.City</td>
             <td>@l.Country</td>
-            <td>@gifts.Where(g=>g.GiftId == l.GiftId).First().GiftName</td>
+            <td>@gifts.Where(g => g.GiftId == l.GiftId).First().GiftName</td>
             <td>@l.Note</td>
-            <td><a asp-controller="Letter" asp-route-id= "@l.LetterId" asp-action="Review">Review</a></td>
+            <td><a asp-controller="Letter" asp-route-id="@l.LetterId" asp-action="Review">Review</a></td>
         </tr>
     }
 </table>
+}
+else
+{
+<p>You are an unauthorized to view this page</p>
+<p>Click <a asp-controller="Home" asp-action="Index">here</a> to go to main page</p>
+}

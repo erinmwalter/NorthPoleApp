@@ -1,0 +1,48 @@
+﻿@model Employee
+
+@{
+    List<Gift> gifts = ViewData["gifts"] as List<Gift>;
+}
+
+<h3>Hello, @Model.FullName!</h3>
+
+<h4>Your Current Tasks</h4>
+@if (EmployeeDAL.CurrentEmployeeId != -1)
+{
+    <table>
+        <tr>
+            <th>Task Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Current Status</th>
+            <th>Gift Name</th>
+            <th>Update</th>
+            @if (EmployeeDAL.IsAdmin)
+            {
+                <th>Delete</th>
+            }
+        </tr>
+
+        @foreach (NorthPoleApp.Models.Task t in Model.Tasks)
+        {
+    <tr>
+        <td>@t.Id</td>
+        <td>@t.Name</td>
+        <td>@t.Description</td>
+        <td>@t.CurrentStatus</td>
+        <td>@gifts.Where(g => g.GiftId == t.GiftId).First().GiftName</td>
+        <td><a asp-action="UpdateTask" asp-controller="Task" asp-route-Id="@t.Id">Update</a></td>
+        @if (EmployeeDAL.IsAdmin)
+        {
+            <td><a asp-action="Delete" asp-controller="Task" asp-route-Id="@t.Id">Delete</a></td>
+        }
+    </tr>
+
+        }
+    </table>
+}
+else
+{
+    <p>You are an unauthorized to view this page</p>
+    <p>Click <a asp-controller="Home" asp-action="Index">here</a> to go to main page</p>
+}

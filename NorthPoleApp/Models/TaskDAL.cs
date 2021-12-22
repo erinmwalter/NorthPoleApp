@@ -16,7 +16,7 @@ namespace NorthPoleApp.Models
         {
             using (var connect = new MySqlConnection(Secret.Connection))
             {
-                string sql = $"insert into tasks values(0, '{t.Name}', \"{t.Description}\", '{t.CurrentStatus}', {t.GiftId}, {t.LetterId})";
+                string sql = $"insert into tasks values(0, \"{t.Name}\", \"{t.Description}\", '{t.CurrentStatus}', {t.GiftId}, {t.LetterId})";
                 connect.Open();
                 connect.Query<Task>(sql);
                 connect.Close();
@@ -67,7 +67,7 @@ namespace NorthPoleApp.Models
         {
             using (var connect = new MySqlConnection(Secret.Connection))
             {
-                string sql = $"update tasks set `name`='{t.Name}', `description`=\"{t.Description}\", currentStatus='{t.CurrentStatus}', giftId={t.GiftId}, letterId={t.LetterId} where id={t.Id}";
+                string sql = $"update tasks set `name`=\"{t.Name}\", `description`=\"{t.Description}\", currentStatus='{t.CurrentStatus}', giftId={t.GiftId}, letterId={t.LetterId} where id={t.Id}";
                 connect.Open();
                 connect.Query<Task>(sql);
                 connect.Close();
@@ -90,6 +90,21 @@ namespace NorthPoleApp.Models
                 connect.Query<Task>(sql);
                 connect.Query<Letter>(lettersql);
                 connect.Close();
+            }
+        }
+
+        //need this in order to assigne employeestasks
+        public int GetId(int letterID) 
+        {
+            using (var connect = new MySqlConnection(Secret.Connection))
+            {
+                string sql = $"select * from tasks where letterId={letterID}";
+
+                connect.Open();
+                int id = connect.Query<Task>(sql).First().Id;
+                connect.Close();
+
+                return id;
             }
         }
     }

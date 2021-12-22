@@ -20,6 +20,7 @@ create table letters
     note varchar(200),
     isGood bit,
     giftId int,
+    isReviewed bit,
     foreign key (giftId) references gifts(giftId)
 );
 
@@ -78,3 +79,6 @@ values(0, 'Lump of Coal'),
 
 insert into employees 
 values(0, 'Buddy the Elf', 'Chief Production Elf', 'buddy', 'candycane');
+
+
+

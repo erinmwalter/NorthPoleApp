@@ -30,6 +30,6 @@ namespace NorthPoleApp.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public List<Task> Tasks { get; set; }
+        public List<Task> Tasks { get; set; } = new List<Task>();
     }
 }

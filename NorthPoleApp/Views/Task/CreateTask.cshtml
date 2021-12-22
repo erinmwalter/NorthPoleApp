@@ -16,6 +16,17 @@
         @Html.EditorFor(t => t.Description)
         @Html.ValidationMessageFor(t => t.Description, "", new { @class = "text-danger" })
     </div>
+    <div>
+        <p>Assign Task</p>
+        @foreach (Employee e in employees) 
+        { 
+            <input type="checkbox" name="employees[]" value="@e.Id" id="@e.Id" />
+            <label for="@e.Id">@e.FullName</label>
+            <br />
+        }
+    </div>
+    <input type="hidden" name="GiftId" value="@Model.GiftId" />
+    <input type="hidden" name="LetterId" value="@Model.LetterId" />
     <input type="hidden" name="CurrentStatus" value="New" />
     <input type="Submit" value="Create Task" />
 }

@@ -16,7 +16,7 @@ namespace NorthPoleApp.Models
         {
             using (var connect = new MySqlConnection(Secret.Connection)) 
             {
-                string sql = $"insert into employeestasks values(0, {employeeID}, {taskID}";
+                string sql = $"insert into employeestasks values(0, {employeeID}, {taskID})";
                 connect.Open();
                 connect.Query<EmployeeTask>(sql);
                 connect.Close();
@@ -39,6 +39,20 @@ namespace NorthPoleApp.Models
 
 
             }
+        }
+
+        public void DeleteByTaskId(int taskId) 
+        {
+            using (var connect = new MySqlConnection(Secret.Connection))
+            {
+                string sql = $"delete from employeestasks where taskid={taskId}";
+                connect.Open();
+                connect.Query<EmployeeTask>(sql);
+                connect.Close();
+
+
+            }
+
         }
 
         //not sure if I need a READ method
