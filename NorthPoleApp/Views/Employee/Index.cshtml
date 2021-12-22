@@ -1,4 +1,9 @@
 ﻿@model Employee
 
 <h5>Welcome, @Model.FullName</h5>
-<p>Regular Employee page</p>
+
+@if (Model.Id == 1) 
+{ 
+    <p>You have @ViewBag.LetterCount new letters to read!</p>
+    <p>Click <a asp-controller="Letter" asp-action="LetterList">here</a> to read.</p>
+}

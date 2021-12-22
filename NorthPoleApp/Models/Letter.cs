@@ -31,7 +31,10 @@ namespace NorthPoleApp.Models
         [Display(Name= "Note To Santa")]
         public string Note { get; set; }
 
+        [Display(Name="Were they good?")]
         public bool IsGood { get; set; }
+
+        public bool IsReviewed { get; set; }
 
         [Display(Name = "Gift Choice")]
         public int GiftId { get; set; }

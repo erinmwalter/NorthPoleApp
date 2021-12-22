@@ -26,6 +26,13 @@ namespace NorthPoleApp.Models
 
         public List<Employee> Employees { get; set; }
 
+        public Task() { }
+
+        public Task(int GiftId, int LetterId) 
+        {
+            this.GiftId = GiftId;
+            this.LetterId = LetterId;
+        }
     }
 
     public enum Status 

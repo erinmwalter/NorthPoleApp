@@ -76,4 +76,5 @@ values(0, 'Lump of Coal'),
 (0, 'Legos'),
 (0, 'Action Figure');
 
--- select * from gifts;
+insert into employees 
+values(0, 'Buddy the Elf', 'Chief Production Elf', 'buddy', 'candycane');

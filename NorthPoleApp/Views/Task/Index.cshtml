@@ -1,0 +1,35 @@
+﻿@model List<NorthPoleApp.Models.Task>
+
+<h3>Task Dashboard</h3>
+<table>
+    <tr>
+        <th>Task Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Current Status</th>
+        <th>Letter Id</th>
+        <th>Assigned To</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+
+    @foreach (NorthPoleApp.Models.Task t in Model)
+    {
+            <tr>
+                <td>@t.Id</td>
+                <td>@t.Name</td>
+                <td>@t.Description</td>
+                <td>@t.CurrentStatus</td>
+                <td>@t.LetterId</td>
+                <td>
+                    @foreach (Employee e in t.Employees) 
+                    { 
+                        <p>@e.FullName</p>
+                    }
+                </td>
+                <td><a asp-action="UpdateTask" asp-controller="Task" asp-route-Id="@t.Id">Update</a></td>
+                <td><a asp-action="Delete" asp-controller="Task" asp-route-Id="@t.Id">Delete</a></td>
+            </tr>
+
+    }
+</table>

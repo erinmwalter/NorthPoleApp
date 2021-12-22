@@ -16,7 +16,7 @@ namespace NorthPoleApp.Models
         {
             using (var connect = new MySqlConnection(Secret.Connection)) 
             {
-                string sql = $"insert into letters values(0, '{l.Name}', {l.Age}, '{l.City}', '{l.Country}', \"{l.Note}\", null, {l.GiftId})";
+                string sql = $"insert into letters values(0, '{l.Name}', {l.Age}, '{l.City}', '{l.Country}', \"{l.Note}\", null, {l.GiftId}, 0)";
                 connect.Open();
                 connect.Query<Letter>(sql);
                 connect.Close();
@@ -29,7 +29,7 @@ namespace NorthPoleApp.Models
         {
             using (var connect = new MySqlConnection(Secret.Connection))
             {
-                string sql = $"update letters set `name`='{l.Name}, age={l.Age}, city='{l.City}, country='{l.Country}, note=\"{l.Note}\", giftId={l.GiftId}, isGood={l.IsGood} where letterId={l.LetterId}";
+                string sql = $"update letters set `name`='{l.Name}, age={l.Age}, city='{l.City}, country='{l.Country}, note=\"{l.Note}\", giftId={l.GiftId}, isGood={l.IsGood}, isReviewed={l.IsReviewed} where letterId={l.LetterId}";
                 connect.Open();
                 connect.Query<Letter>(sql);
                 connect.Close();
@@ -44,7 +44,7 @@ namespace NorthPoleApp.Models
             {
                 string sql = $"select * from letters where letterid={id}";
                 connect.Open();
-                Letter l = connect.Query<Letter>(sql).First();
+                Letter l = connect.Query<Letter>(sql).FirstOrDefault();
                 connect.Close();
 
                 return l;

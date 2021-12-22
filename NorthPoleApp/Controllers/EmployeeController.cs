@@ -10,10 +10,12 @@ namespace NorthPoleApp.Controllers
     public class EmployeeController : Controller
     {
         EmployeeDAL eDB = new EmployeeDAL();
+        LetterDAL lDB = new LetterDAL();
 
         public IActionResult Index()
         {
             Employee e = eDB.GetEmployee(EmployeeDAL.CurrentEmployeeId);
+            ViewBag.LetterCount = lDB.GetLetters().Count(x => x.IsReviewed == false);
             return View(e);
         }
 
@@ -90,6 +92,25 @@ namespace NorthPoleApp.Controllers
         {
             List<Employee> employees = eDB.GetEmployees();
             return View(employees);
+        }
+
+        public IActionResult AdminEdit(int id) 
+        {
+            Employee e = eDB.GetEmployee(id);
+            return View(e);
+        }
+
+        [HttpPost]
+        public IActionResult AdminEdit(Employee e) 
+        {
+            eDB.UpdateEmployee(e);
+            return RedirectToAction("ViewRoster", "Employee");
+        }
+
+        public IActionResult Delete(int id) 
+        {
+            eDB.DeleteEmployee(id);
+            return RedirectToAction("ViewRoster", "Employee");
         }
     }
 }

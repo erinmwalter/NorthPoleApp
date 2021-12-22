@@ -52,5 +52,18 @@ namespace NorthPoleApp.Models
                 return gifts;
             }
         }
+
+        public Gift GetGift(int id)
+        {
+            using (var connect = new MySqlConnection(Secret.Connection))
+            {
+                string sql = $"select * from gifts where giftId={id}";
+                connect.Open();
+                Gift gift = connect.Query<Gift>(sql).First();
+                connect.Close();
+
+                return gift;
+            }
+        }
     }
 }

@@ -1,0 +1,21 @@
+﻿@model NorthPoleApp.Models.Task
+
+@{
+    List<Employee> employees = ViewData["Employees"] as List<Employee>;
+}
+
+@using (Html.BeginForm("CreateTask", "Task", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(t => t.Name)
+        @Html.EditorFor(t => t.Name)
+        @Html.ValidationMessageFor(t => t.Name, "", new { @class = "text-danger" })
+    </div>
+    <div>
+        @Html.LabelFor(t => t.Description)
+        @Html.EditorFor(t => t.Description)
+        @Html.ValidationMessageFor(t => t.Description, "", new { @class = "text-danger" })
+    </div>
+    <input type="hidden" name="CurrentStatus" value="New" />
+    <input type="Submit" value="Create Task" />
+}

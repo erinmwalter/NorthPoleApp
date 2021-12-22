@@ -1,0 +1,32 @@
+﻿@model Letter
+<table>
+    <tr>
+        <th>Letter ID</th>
+        <th>Sender's Name</th>
+        <th>Age</th>
+        <th>City/State/Province</th>
+        <th>Country</th>
+        <th>Gift Request</th>
+        <th>Note to Santa</th>
+    </tr>
+    <tr>
+        <td>@Model.LetterId</td>
+        <td>@Model.Name</td>
+        <td>@Model.Age</td>
+        <td>@Model.City</td>
+        <td>@Model.Country</td>
+        <td>@ViewBag.GiftName</td>
+        <td>@Model.Note</td>
+    </tr>
+</table>
+
+<h5>Update Status</h5>
+@using (Html.BeginForm("Review", "Letter", FormMethod.Post)) 
+{ 
+    <div>
+        @Html.LabelFor(model=>model.IsGood)
+        @Html.CheckBoxFor(model=>model.IsGood)
+        @Html.ValidationMessageFor(model=>model.IsGood, "", new { @class="text-danger"})
+    </div>
+    <input type="Submit" value="Submit" />
+}

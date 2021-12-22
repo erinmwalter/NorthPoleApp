@@ -72,13 +72,13 @@ body {
 
 
 th {
-    padding: 15px;
+    padding: 5px;
     border-bottom: 4px solid black;
-    width: 20%;
+    width: 10%;
 }
 
 td {
-    padding: 15px;
+    padding: 5px;
     border-bottom: 2px black solid;
-    width: 20%;
+    width: 10%;
 }

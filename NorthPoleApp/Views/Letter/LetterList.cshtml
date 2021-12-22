@@ -1,0 +1,32 @@
+﻿@model List<Letter>
+
+@{
+    List<Gift> gifts = ViewData["Gifts"] as List<Gift>;
+}
+
+<h3>New Letters</h3>
+<table>
+    <tr>
+        <th>Letter ID</th>
+        <th>Sender's Name</th>
+        <th>Age</th>
+        <th>City/State/Province</th>
+        <th>Country</th>
+        <th>Gift Request</th>
+        <th>Note to Santa</th>
+        <th>Review</th>
+    </tr>
+    @foreach (Letter l in Model)
+    {
+        <tr>
+            <td>@l.LetterId</td>
+            <td>@l.Name</td>
+            <td>@l.Age</td>
+            <td>@l.City</td>
+            <td>@l.Country</td>
+            <td>@gifts.Where(g=>g.GiftId == l.GiftId).First().GiftName</td>
+            <td>@l.Note</td>
+            <td><a asp-controller="Letter" asp-route-id= "@l.LetterId" asp-action="Review">Review</a></td>
+        </tr>
+    }
+</table>

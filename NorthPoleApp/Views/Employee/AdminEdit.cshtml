@@ -1,0 +1,26 @@
+﻿@model Employee
+
+<h5>Update Employee Information</h5>
+
+@using (Html.BeginForm("AdminEdit", "Employee", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(e => e.FullName)
+        @Html.EditorFor(e => e.FullName)
+        @Html.ValidationMessageFor(e => e.FullName, "", new { @class = "text-danger" })
+    </div>
+    <div>
+        @Html.LabelFor(e => e.Title)
+        @Html.EditorFor(e => e.Title)
+        @Html.ValidationMessageFor(e => e.Title, "", new { @class = "text-danger" })
+    </div>
+    <div>
+        @Html.LabelFor(e => e.UserName)
+        @Html.TextBoxFor(e => e.UserName)
+        @Html.ValidationMessageFor(e => e.UserName, "", new { @class = "text-danger" })
+    </div>
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div>
+        <input type="submit" value="Update" />
+    </div>
+}
